@@ -5,9 +5,12 @@ import { Feather } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
+import * as VideoThumbnails from "expo-video-thumbnails";
 import style from "./style";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CameraScreeen() {
+  const [image, setImage] = useState(null);
   const [type, setType] = useState(CameraType.back);
   const [flashMode, setFlashMode] = useState(FlashMode.off);
   const [permission, requestPermission] = Camera.useCameraPermissions();
@@ -18,6 +21,8 @@ export default function CameraScreeen() {
   const [cameraRef, setCameraRef] = useState(null);
   const [camereReady, setCamereReady] = useState(false);
   const [mediaAsset, setMediaAsset] = useState([]);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -78,18 +83,30 @@ export default function CameraScreeen() {
     console.log(flashMode);
   };
 
+  const generateThumbnail = async (source) => {
+    try {
+      const { uri } = await VideoThumbnails.getThumbnailAsync(source, {
+        time: 1000,
+      });
+      return uri;
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   const pickFromGallery = async () => {
     await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
       allowsEditing: true,
       aspect: [16, 9],
       quality: 1,
     })
-      .then((result) => {
+      .then(async (result) => {
         if (!result.canceled) {
           let source = result.assets[0].uri;
           // TODO post to database
-          console.log(source);
+          let sourceThumb = await generateThumbnail(source);
+          navigation.navigate("savePost", { source, sourceThumb });
         }
 
         if (result.canceled) {

@@ -4,6 +4,7 @@ import style from "./style";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import CameraScreeen from "../Camera";
+import ProfileScreen from "../Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +62,7 @@ export default function Home() {
       />
       <Tab.Screen
         name="me"
-        component={Feed}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="user" size={24} color={color} />
