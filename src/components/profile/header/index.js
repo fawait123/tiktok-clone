@@ -1,9 +1,11 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import style from "./style";
 
 export default function Header({ user }) {
+  const navigation = useNavigation();
   return (
     <View style={style.container}>
       <View style={style.profile}>
@@ -25,7 +27,10 @@ export default function Header({ user }) {
         </View>
       </View>
       <View style={style.providerButton}>
-        <TouchableOpacity style={style.containerButton}>
+        <TouchableOpacity
+          style={style.containerButton}
+          onPress={() => navigation.navigate("editProfile")}
+        >
           <Text style={style.buttonText}>Edit Profile</Text>
         </TouchableOpacity>
       </View>

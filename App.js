@@ -9,6 +9,7 @@ import rooReducer from "./src/redux/reducers";
 import AuthScreen from "./src/screens/Auth";
 import { StatusBar } from "expo-status-bar";
 import Route from "./src/navigation";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const store = createStore(rooReducer, applyMiddleware(thunk));
 
@@ -18,10 +19,21 @@ if (firebase.apps.length === 0) {
 
 export const db = firebase.firestore();
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: false,
+      staleTime: Infinity,
+    },
+  },
+});
+
 export default function App() {
   return (
     <Provider store={store}>
-      <Route />
+      <QueryClientProvider client={queryClient}>
+        <Route />
+      </QueryClientProvider>
       <StatusBar style="auto" />
     </Provider>
   );
