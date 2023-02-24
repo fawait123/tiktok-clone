@@ -109,10 +109,12 @@ export default function EditProfileScreen() {
         <Image style={style.image} source={{ uri: currentUser.photoURL }} />
         <Feather style={style.icon} name="camera" size={24} color={"white"} />
       </TouchableOpacity>
+      <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "500" }}>
+        {currentUser.displayName}
+      </Text>
       <View style={style.EditProfile}>
         <TextInput
           placeholder="displayName"
-          value={currentUser.displayName}
           style={style.textInput}
           onChangeText={(text) => setDisplayName(text)}
         />

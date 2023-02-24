@@ -39,3 +39,29 @@ export const userNameSave = (name) =>
         reject(err);
       });
   });
+
+export const searchByUserEmail = (email) =>
+  new Promise((resolve, reject) => {
+    if (email === "") {
+      resolve([]);
+    }
+    firebase
+      .firestore()
+      .collection("user")
+      .where("email", ">=", email)
+      .where("email", "<=", email + "\uf8ff")
+      .get()
+      .then((snapShot) => {
+        const data = snapShot.docs.map((el) => {
+          let data = el.data();
+          let id = el.id;
+
+          return { id, ...data };
+        });
+
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });

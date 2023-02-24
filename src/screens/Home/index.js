@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import CameraScreeen from "../Camera";
 import ProfileScreen from "../Profile";
+import SearchScreen from "../Search";
+import FeedScreen from "../Feed";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +28,7 @@ export default function Home() {
     >
       <Tab.Screen
         name="feed"
-        component={Feed}
+        component={FeedScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="home" size={24} color={color} />
@@ -35,7 +37,7 @@ export default function Home() {
       />
       <Tab.Screen
         name="discover"
-        component={Feed}
+        component={SearchScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="search" size={24} color={color} />
