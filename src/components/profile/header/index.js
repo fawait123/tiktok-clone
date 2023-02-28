@@ -10,7 +10,7 @@ export default function Header({ user }) {
     <View style={style.container}>
       <View style={style.profile}>
         <Avatar.Icon size={80} icon={"account"} />
-        <Text style={style.text}>{user.email}</Text>
+        <Text style={style.text}>{user?.email}</Text>
       </View>
       <View style={style.containerDetail}>
         <View style={style.profileDetail}>

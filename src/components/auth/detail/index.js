@@ -20,12 +20,11 @@ export default function AuthDetail({
   const handleLogin = () => {
     dispatch(login(email, password))
       .then((response) => {
-        console.log(response.user);
         db.collection("user")
           .doc(response.user.uid)
           .set({
-            displayName: response.user.displayName,
-            email: response.user.email,
+            displayName: response.user?.displayName,
+            email: response.user?.email,
           })
           .then(() => {
             console.log("Login successful");

@@ -8,7 +8,7 @@ export default function Navbar({ user }) {
     <View style={style.container}>
       <View style={style.TopContainer}>
         <Feather name="search" size={24} color="black" />
-        <Text style={style.text}>{user.email}</Text>
+        <Text style={style.text}>{user?.email}</Text>
         <Feather name="align-justify" size={24} color="black" />
       </View>
     </View>

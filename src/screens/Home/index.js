@@ -7,6 +7,7 @@ import CameraScreeen from "../Camera";
 import ProfileScreen from "../Profile";
 import SearchScreen from "../Search";
 import FeedScreen from "../Feed";
+import FeedNavigation from "../../navigation/feed";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export default function Home() {
     >
       <Tab.Screen
         name="feed"
-        component={FeedScreen}
+        component={FeedNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="home" size={24} color={color} />

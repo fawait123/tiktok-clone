@@ -88,7 +88,7 @@ export const SinglePost = forwardRef(({ item }, parentRef) => {
         rate={1.0}
         volume={1.0}
         source={{
-          uri: item.media[0],
+          uri: item ? item.media[0] : "",
         }}
       />
     </>
